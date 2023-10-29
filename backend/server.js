@@ -1,12 +1,26 @@
 const express = require("express");
-const connectDB = require("./config/db");
 const dotenv = require("dotenv");
 
+
+const cloudinary = require("cloudinary");
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+const fileUpload = require("express-fileupload");
 const path = require("path");
+var cors = require("cors");
+const connectDB = require("./config/db");
+const errorMiddleware = require("./middleware/errorHandler")
+const app = express();
 
 dotenv.config();
+dotenv.config();
+app.use(cookieParser());
+app.use(express.json());
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
+app.use(fileUpload());
+app.use(errorMiddleware);
 connectDB();
-const app = express();
 
 app.use(express.json()); // to accept json data
 
@@ -22,8 +36,8 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.resolve(__dirname1, "frontend", "build", "index.html"))
   );
 } else {
-  app.get("/", (req, res) => {
-    res.send("API is running..");
+  app.get("/cc", (req, res) => {
+    res.send({data:"API is running.."});
   });
 }
 
