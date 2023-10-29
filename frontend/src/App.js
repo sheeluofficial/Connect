@@ -5,8 +5,9 @@ import {
   useHistory,
   Routes,
 } from "react-router-dom";
+import Loader from './components/layouts/Loader';
 
-import Loader from "./components/layouts/Loader.js";
+
 
 const Login = React.lazy(() => import("./components/Authentication/Login"));
 const Signup = React.lazy(() => import("./components/Authentication/Signup"));
