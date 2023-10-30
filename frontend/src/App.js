@@ -2,7 +2,7 @@ import './App.css';
 import React, { useEffect } from "react";
 import {
   Route,
-  useHistory,
+  useNavigate,
   Routes,
 } from "react-router-dom";
 import Loader from './components/layouts/Loader';
@@ -17,6 +17,18 @@ import("./components/Authentication/ForgotPassword")
 const Chatpage = React.lazy(() => import("./Pages/Chatpage"));
 
 function App() {
+
+  const navigate = useNavigate(); 
+  const user = JSON.parse(localStorage.getItem("userInfo"));
+ 
+  useEffect(() => {
+    if (!user) {
+      navigate("/");
+    } else {
+      navigate("/chats");
+    }
+  }, [navigate, user]);
+
   return (
     <div className="App">
       <React.Suspense fallback={<Loader />}>

@@ -25,6 +25,23 @@ connectDB();
 app.use(express.json()); // to accept json data
 
 
+// routes
+const userRoute = require("./route/userRoute");
+const chatRuote = require("./route/chatRoute");
+const messageRoute = require("./route/messageRoutes");
+
+
+
+app.use("/api/user", userRoute);
+app.use("/api/chat", chatRuote);
+app.use("/api/message", messageRoute);
+app.use(cors());
+// conncet with cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET,
+});
 // --------------------------deployment------------------------------
 
 const __dirname1 = path.resolve();

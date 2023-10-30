@@ -85,7 +85,7 @@ const { isAuth ,setIsAuth } = ChatState();
       localStorage.setItem("userInfo", JSON.stringify(data));
          setTimeout(() => {
         setIsAuth(false);
-        navigate.push("/chats");
+        navigate("/chats");
          }, 2000);
       
     } catch (error) {
